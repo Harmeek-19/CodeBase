@@ -141,9 +141,9 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 
 ## Acknowledgments
 
-- OpenAI for providing the GPT model used in documentation generation
+- Google for providing the Generative AI (Gemini) model used in documentation generation
 - All the open-source libraries and frameworks used in this project
 
 ## Contact
 
-For any queries or support, please contact us at support@codebase-project.com or open an issue on GitHub.
+For any queries or support, please contact us at harmeek1929@gmail.com or open an issue on GitHub.
