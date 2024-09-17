@@ -1,42 +1,82 @@
-# CodeBase
+# CodeBase - Advanced Code Documentation and Management System
+
+## Table of Contents
+
+1. [Project Overview](#project-overview)
+2. [Technology Stack](#technology-stack)
+3. [Project Structure](#project-structure)
+4. [Setup and Installation](#setup-and-installation)
+5. [Database Configuration](#database-configuration)
+6. [Environment Variables](#environment-variables)
+7. [Running the Server](#running-the-server)
+8. [API Endpoints](#api-endpoints)
+9. [Authentication](#authentication)
+10. [Models](#models)
+11. [AI-Powered Documentation Generation](#ai-powered-documentation-generation)
+12. [Code Explorer](#code-explorer)
+13. [User Dashboard](#user-dashboard)
+14. [API Key Generation](#api-key-generation)
+15. [Search Functionality](#search-functionality)
+16. [Pagination](#pagination)
+17. [Error Handling and Logging](#error-handling-and-logging)
+18. [Testing](#testing)
+19. [Deployment](#deployment)
+20. [Contributing](#contributing)
+21. [Troubleshooting](#troubleshooting)
+22. [License](#license)
+
+## Project Overview
 
 CodeBase is a comprehensive web application designed to help developers manage, document, and explore code snippets and repositories. It provides an intuitive interface for submitting code or repository URLs, generating documentation using AI, and exploring a vast collection of code snippets.
 
-## Features
+## Technology Stack
 
-- User authentication and authorization
-- Submit code snippets or repository URLs
-- AI-powered documentation generation
-- Code snippet exploration and search
-- Dashboard for managing user-submitted snippets
-- API key generation for CI/CD integration
-- Pagination for efficient data loading
-- Responsive design for various screen sizes
+- Frontend:
+  - React.js
+  - Tailwind CSS
+  - Axios for API requests
+  - React Router for navigation
 
-## Tech Stack
+- Backend:
+  - Flask (Python)
+  - SQLAlchemy for database ORM
+  - Flask-RESTful for API development
+  - Celery for asynchronous tasks
+  - Redis as message broker
+  - OpenAI GPT for documentation generation
 
-### Frontend
-- React.js
-- Tailwind CSS
-- Axios for API requests
-- React Router for navigation
+- Database:
+  - PostgreSQL
 
-### Backend
-- Flask (Python)
-- SQLAlchemy for database ORM
-- Flask-RESTful for API development
-- Celery for asynchronous tasks
-- Redis as message broker
-- OpenAI GPT for documentation generation
+## Project Structure
 
-## Prerequisites
+```
+codebase/
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   └── App.js
+│   ├── package.json
+│   └── tailwind.config.js
+├── backend/
+│   ├── app/
+│   │   ├── api/
+│   │   ├── models/
+│   │   ├── services/
+│   │   └── utils/
+│   ├── config/
+│   ├── migrations/
+│   ├── tests/
+│   └── wsgi.py
+├── .gitignore
+├── README.md
+└── requirements.txt
+```
 
-- Node.js (v14+)
-- Python (v3.7+)
-- Redis
-- PostgreSQL
-
-## Setup Instructions
+## Setup and Installation
 
 ### Backend Setup
 
@@ -57,26 +97,6 @@ CodeBase is a comprehensive web application designed to help developers manage, 
    pip install -r requirements.txt
    ```
 
-4. Set up environment variables:
-   Create a `.env` file in the backend directory and add the following:
-   ```
-   FLASK_APP=app
-   FLASK_ENV=development
-   DATABASE_URL=postgresql://username:password@localhost/codebase
-   SECRET_KEY=your_secret_key
-   OPENAI_API_KEY=your_openai_api_key
-   ```
-
-5. Initialize the database:
-   ```
-   flask db upgrade
-   ```
-
-6. Start the Flask development server:
-   ```
-   flask run
-   ```
-
 ### Frontend Setup
 
 1. Navigate to the frontend directory:
@@ -89,23 +109,43 @@ CodeBase is a comprehensive web application designed to help developers manage, 
    npm install
    ```
 
-3. Create a `.env` file in the frontend directory and add:
+## Database Configuration
+
+1. Install PostgreSQL if not already installed.
+2. Create a new database for the project.
+3. Update the `DATABASE_URL` in the `.env` file with your database credentials.
+
+## Environment Variables
+
+Create a `.env` file in the backend directory with the following variables:
+
+```
+FLASK_APP=app
+FLASK_ENV=development
+DATABASE_URL=postgresql://username:password@localhost/codebase
+SECRET_KEY=your_secret_key
+OPENAI_API_KEY=your_openai_api_key
+```
+
+Create a `.env` file in the frontend directory with:
+
+```
+REACT_APP_API_URL=http://localhost:5000/api/v1
+```
+
+## Running the Server
+
+1. Start the backend server:
    ```
-   REACT_APP_API_URL=http://localhost:5000/api/v1
+   cd backend
+   flask run
    ```
 
-4. Start the development server:
+2. Start the frontend development server:
    ```
+   cd frontend
    npm start
    ```
-
-## Usage
-
-1. Open your browser and go to `http://localhost:3000`
-2. Sign up for a new account or log in
-3. Use the "Submit Code" page to submit code snippets or repository URLs
-4. Explore submitted snippets and their documentation in the "Code Explorer" page
-5. Manage your snippets and generate API keys from the Dashboard
 
 ## API Endpoints
 
@@ -121,29 +161,81 @@ CodeBase is a comprehensive web application designed to help developers manage, 
 - POST `/api/v1/submit`: Submit code or repository for documentation
 - POST `/api/v1/submit-correction`: Submit a correction for existing documentation
 
-For detailed API documentation, refer to the [API Documentation](./API_DOCUMENTATION.md) file.
+## Authentication
+
+The system uses JWT (JSON Web Tokens) for authentication. Include the token in the Authorization header for protected routes.
+
+## Models
+
+- User
+- CodeSnippet
+- Documentation
+- Project
+- APIKey
+
+## AI-Powered Documentation Generation
+
+CodeBase uses OpenAI's GPT model to generate comprehensive documentation for submitted code snippets and repositories.
+
+## Code Explorer
+
+The Code Explorer feature allows users to browse, search, and view documentation for various code snippets and repositories.
+
+## User Dashboard
+
+The dashboard provides an overview of user-submitted snippets, documentation status, and options to manage API keys.
+
+## API Key Generation
+
+Users can generate API keys for integrating CodeBase with their CI/CD pipelines or other external services.
+
+## Search Functionality
+
+CodeBase offers a powerful search feature to find relevant code snippets based on various criteria such as language, keywords, and stars.
+
+## Pagination
+
+All list views (e.g., code snippets, search results) are paginated to ensure efficient loading and browsing of large datasets.
+
+## Error Handling and Logging
+
+The application implements comprehensive error handling and logging to facilitate debugging and improve user experience.
+
+## Testing
+
+To run the tests:
+
+```
+cd backend
+pytest
+```
+
+## Deployment
+
+(Include deployment instructions here, e.g., for Heroku, AWS, or other platforms)
 
 ## Contributing
 
-We welcome contributions to CodeBase! Please follow these steps to contribute:
+We welcome contributions! Follow these steps to contribute:
 
-1. Fork the repository
-2. Create a new branch: `git checkout -b feature-branch-name`
-3. Make your changes and commit them: `git commit -m 'Add some feature'`
-4. Push to the branch: `git push origin feature-branch-name`
-5. Submit a pull request
+1. Fork the repository.
+2. Create a new branch: `git checkout -b feature-branch-name`.
+3. Make your changes and commit them: `git commit -m 'Add new feature'`.
+4. Push to the branch: `git push origin feature-branch-name`.
+5. Open a pull request.
 
-Please make sure to update tests as appropriate and adhere to the [Code of Conduct](./CODE_OF_CONDUCT.md).
+## Troubleshooting
+
+(Include common issues and their solutions here)
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
-- Google for providing the Generative AI (Gemini) model used in documentation generation
-- All the open-source libraries and frameworks used in this project
+Special thanks to OpenAI for providing the GPT model used in documentation generation and to all open-source libraries used in this project.
 
 ## Contact
 
-For any queries or support, please contact us at harmeek1929@gmail.com or open an issue on GitHub.
+For any queries or support, contact us at support@codebase-project.com or open an issue on GitHub.
