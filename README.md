@@ -24,6 +24,8 @@
 20. [Contributing](#contributing)
 21. [Troubleshooting](#troubleshooting)
 22. [License](#license)
+23. [Acknowledgments](#acknowledgments)
+24. [Contact](#contact)
 
 ## Project Overview
 
@@ -140,7 +142,7 @@ Create a `.env` file in the frontend directory with:
 
 ```
 REACT_APP_API_URL=http://localhost:5000/api/v1
-``
+```
 
 ## Running the Server
 
@@ -182,10 +184,42 @@ The system uses JWT (JSON Web Tokens) for authentication. Include the token in t
 - Project
 - APIKey
 
-
 ## AI-Powered Documentation Generation
 
 CodeBase uses Google's Generative AI (Gemini) model to generate comprehensive documentation for submitted code snippets and repositories.
+
+## Code Explorer
+
+The Code Explorer feature allows users to browse, search, and view documentation for various code snippets and repositories.
+
+## User Dashboard
+
+The dashboard provides an overview of user-submitted snippets, documentation status, and options to manage API keys.
+
+## API Key Generation
+
+Users can generate API keys for integrating CodeBase with their CI/CD pipelines or other external services.
+
+## Search Functionality
+
+CodeBase offers a powerful search feature to find relevant code snippets based on various criteria such as language, keywords, and stars.
+
+## Pagination
+
+All list views (e.g., code snippets, search results) are paginated to ensure efficient loading and browsing of large datasets.
+
+## Error Handling and Logging
+
+The application implements comprehensive error handling and logging to facilitate debugging and improve user experience.
+
+## Testing
+
+To run the tests:
+
+```
+cd backend
+pytest
+```
 
 ## Deployment
 
@@ -290,41 +324,6 @@ Remember to never commit your `.env` file to version control. Instead, set up en
 
 For specific deployment instructions for platforms like Heroku, AWS Elastic Beanstalk, or Google Cloud Run, please refer to their respective documentation as the process may vary.
 
-## Code Explorer
-
-The Code Explorer feature allows users to browse, search, and view documentation for various code snippets and repositories.
-
-## User Dashboard
-
-The dashboard provides an overview of user-submitted snippets, documentation status, and options to manage API keys.
-
-## API Key Generation
-
-Users can generate API keys for integrating CodeBase with their CI/CD pipelines or other external services.
-
-## Search Functionality
-
-CodeBase offers a powerful search feature to find relevant code snippets based on various criteria such as language, keywords, and stars.
-
-## Pagination
-
-All list views (e.g., code snippets, search results) are paginated to ensure efficient loading and browsing of large datasets.
-
-## Error Handling and Logging
-
-The application implements comprehensive error handling and logging to facilitate debugging and improve user experience.
-
-## Testing
-
-To run the tests:
-
-```
-cd backend
-pytest
-```
-
-
-
 ## Contributing
 
 We welcome contributions! Follow these steps to contribute:
@@ -345,7 +344,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Acknowledgments
 
-Special thanks to OpenAI for providing the GPT model used in documentation generation and to all open-source libraries used in this project.
+Special thanks to Google for providing the Gemini AI model used in documentation generation and to all open-source libraries used in this project.
 
 ## Contact
 
