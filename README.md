@@ -32,21 +32,30 @@ CodeBase is a comprehensive web application designed to help developers manage, 
 ## Technology Stack
 
 - Frontend:
-  - React.js
-  - Tailwind CSS
-  - Axios for API requests
-  - React Router for navigation
+  - React.js: A JavaScript library for building user interfaces
+  - Tailwind CSS: A utility-first CSS framework for rapid UI development
+  - Axios: Promise-based HTTP client for making API requests
+  - React Router: Declarative routing for React applications
 
 - Backend:
-  - Flask (Python)
-  - SQLAlchemy for database ORM
-  - Flask-RESTful for API development
-  - Celery for asynchronous tasks
-  - Redis as message broker
-  - OpenAI GPT for documentation generation
+  - Flask: A lightweight WSGI web application framework in Python
+  - SQLAlchemy: SQL toolkit and Object-Relational Mapping (ORM) for Python
+  - Flask-RESTful: An extension for Flask that adds support for quickly building REST APIs
+  - Celery: An asynchronous task queue/job queue based on distributed message passing
+  - Redis: An in-memory data structure store, used as a message broker for Celery
+  - Google's Generative AI (Gemini): Used for AI-powered documentation generation
 
 - Database:
-  - PostgreSQL
+  - PostgreSQL: A powerful, open-source object-relational database system
+
+- Development and Testing:
+  - pytest: A framework for writing small, readable tests in Python
+  - ESLint: A static code analysis tool for identifying problematic patterns in JavaScript code
+
+- Deployment and DevOps:
+  - Docker: A platform for developing, shipping, and running applications in containers
+  - Gunicorn: A Python WSGI HTTP Server for UNIX, used to run the Flask application in production
+  - Nginx: A web server used as a reverse proxy for Gunicorn
 
 ## Project Structure
 
@@ -124,14 +133,14 @@ FLASK_APP=app
 FLASK_ENV=development
 DATABASE_URL=postgresql://username:password@localhost/codebase
 SECRET_KEY=your_secret_key
-OPENAI_API_KEY=your_openai_api_key
+GEMINI_API_KEY=your_gemini_api_key
 ```
 
 Create a `.env` file in the frontend directory with:
 
 ```
 REACT_APP_API_URL=http://localhost:5000/api/v1
-```
+``
 
 ## Running the Server
 
@@ -173,9 +182,113 @@ The system uses JWT (JSON Web Tokens) for authentication. Include the token in t
 - Project
 - APIKey
 
+
 ## AI-Powered Documentation Generation
 
-CodeBase uses OpenAI's GPT model to generate comprehensive documentation for submitted code snippets and repositories.
+CodeBase uses Google's Generative AI (Gemini) model to generate comprehensive documentation for submitted code snippets and repositories.
+
+## Deployment
+
+To deploy CodeBase, we'll use Docker for containerization and deploy it to a cloud platform. Here are the steps for deploying to a generic cloud platform:
+
+1. Ensure you have Docker installed on your local machine and the deployment server.
+
+2. Create a `Dockerfile` in the root directory of your project:
+
+```Dockerfile
+# Use an official Python runtime as a parent image
+FROM python:3.9-slim-buster
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the current directory contents into the container at /app
+COPY . /app
+
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Make port 5000 available to the world outside this container
+EXPOSE 5000
+
+# Define environment variable
+ENV FLASK_APP=app
+
+# Run gunicorn when the container launches
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "wsgi:app"]
+```
+
+3. Create a `docker-compose.yml` file in the root directory:
+
+```yaml
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - redis
+  db:
+    image: postgres:13
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=codebase
+      - POSTGRES_USER=username
+      - POSTGRES_PASSWORD=password
+  redis:
+    image: "redis:alpine"
+volumes:
+  postgres_data:
+```
+
+4. Build and run your Docker containers:
+
+```
+docker-compose up --build
+```
+
+5. For production deployment, you'll need to set up a reverse proxy using Nginx. Create an `nginx.conf` file:
+
+```nginx
+server {
+    listen 80;
+    server_name yourdomain.com;
+
+    location / {
+        proxy_pass http://web:5000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}
+```
+
+6. Update your `docker-compose.yml` to include Nginx:
+
+```yaml
+services:
+  # ... other services ...
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - web
+```
+
+7. Deploy to your chosen cloud platform (e.g., AWS, Google Cloud, DigitalOcean) by setting up a virtual machine, installing Docker and Docker Compose, and running your containers.
+
+8. Set up SSL/TLS for secure HTTPS connections using a service like Let's Encrypt.
+
+Remember to never commit your `.env` file to version control. Instead, set up environment variables securely on your deployment platform.
+
+For specific deployment instructions for platforms like Heroku, AWS Elastic Beanstalk, or Google Cloud Run, please refer to their respective documentation as the process may vary.
 
 ## Code Explorer
 
