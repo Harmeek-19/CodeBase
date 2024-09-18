@@ -210,9 +210,7 @@ cd backend
 pytest
 ```
 
-## Deployment
 
-(Include deployment instructions here, e.g., for Heroku, AWS, or other platforms)
 
 ## Contributing
 
