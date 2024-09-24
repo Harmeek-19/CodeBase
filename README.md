@@ -26,7 +26,7 @@
 23. [Contact](#contact)
 
 ## Project Overview
-Social Network Backend is a comprehensive GraphQL API designed to power a social networking platform. It provides robust functionality for user management, social interactions, project collaboration, and institutional affiliations.
+Tishya is designed to power a social networking platform. It provides robust functionality for user management, social interactions, project collaboration, and institutional affiliations.
 
 ## Technology Stack
 - **Backend:**
@@ -42,9 +42,7 @@ Social Network Backend is a comprehensive GraphQL API designed to power a social
   - Jest: JavaScript testing framework
   - ESLint: JavaScript linting utility
 
-- **Deployment and DevOps:**
-  - Docker: Containerization platform
-  - Nginx: Web server (reverse proxy)
+
 
 ## Project Structure
 ```
@@ -71,7 +69,7 @@ social-network-backend/
 ## Setup and Installation
 1. Clone the repository:
    ```
-   git clone https://github.com/your-username/social-network-backend.git
+   git clone https://github.com/Harmeek-19/Tishya.git
    cd social-network-backend
    ```
 2. Install dependencies:
